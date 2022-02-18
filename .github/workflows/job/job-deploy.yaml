@@ -1,0 +1,12 @@
+name: "Deploy"
+
+on:
+  workflow_call:
+
+jobs:
+  setup:
+    steps:
+      - name: Build
+        run: |
+          echo "Deploy"
+          ls - lah

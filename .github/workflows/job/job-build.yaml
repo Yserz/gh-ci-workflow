@@ -1,0 +1,28 @@
+name: "Build"
+
+on:
+  workflow_call:
+
+jobs:
+  setup:
+    steps:
+      - name: Checkout Git repository with history for all branches and tags
+        uses: actions/checkout@v2
+        with:
+          fetch-depth: 0
+
+      - name: Set up environment variables
+        run: |
+          echo "GIT_TAG=$(git tag --points-at ${{github.sha}})" >> $GITHUB_ENV
+          echo "GIT_BRANCH=$(git branch --show-current)" >> $GITHUB_ENV
+
+      - name: Print public environment variables
+        run: |
+          echo -e "GIT_TAG = ${GIT_TAG}"
+          echo -e "GIT_BRANCH = ${GIT_BRANCH}"
+
+      - name: Install dependencies
+        run: yarn --frozen-lockfile
+
+      - name: Build
+        run: yarn build
