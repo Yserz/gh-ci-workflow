@@ -4,10 +4,10 @@ on:
   workflow_call:
 
 jobs:
-  setup:
+  deploy:
     runs-on: ubuntu-latest
     steps:
-      - name: Build
+      - name: Deploy
         run: |
           echo "Deploy"
           ls -lah
