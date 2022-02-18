@@ -27,5 +27,5 @@ jobs:
     uses: ./.github/workflows/job-test.yaml
 
   deploy:
-    needs: [build, test]
+    needs: [build, test, test-types]
     uses: ./.github/workflows/job-deploy.yaml
