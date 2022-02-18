@@ -33,7 +33,8 @@ jobs:
       OVERLAY: c
 
   build:
-    needs: ["build-a", "build-b", "build-c"]
+    needs: [build-a, build-b, build-c]
+    runs-on: ubuntu-latest
     steps:
       - run: echo "Build successful"
 
