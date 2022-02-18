@@ -4,11 +4,20 @@ on:
   workflow_call:
 
 jobs:
-  deploy:
+  deploy_staging:
+    if: secrets.ENV == 'staging'
     runs-on: ubuntu-latest
     steps:
       - name: Deploy
         run: |
-          echo is staging ${{secrets.ENV == 'staging'}}
-          echo is production ${{secrets.ENV == 'production'}}
+          echo "Deploy staging"
+          ls -lah
+
+  deploy_production:
+    if: secrets.ENV == 'production'
+    runs-on: ubuntu-latest
+    steps:
+      - name: Deploy
+        run: |
+          echo "Deploy production"
           ls -lah
