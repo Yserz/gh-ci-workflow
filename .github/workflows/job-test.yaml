@@ -7,6 +7,11 @@ jobs:
   setup:
     runs-on: ubuntu-latest
     steps:
+      - name: Checkout Git repository
+        uses: actions/checkout@v2
+        with:
+          fetch-depth: 0
+
       - name: Install dependencies
         run: yarn --frozen-lockfile
 
