@@ -15,12 +15,12 @@ jobs:
 
   build:
     needs: cancel-previous
-    uses: ./.github/workflows/job/job-build.yaml
+    uses: ./.github/workflows/job-build.yaml
 
   test:
     needs: build
-    uses: ./.github/workflows/job/job-test.yaml
+    uses: ./.github/workflows/job-test.yaml
 
   deploy:
     needs: test
-    uses: ./.github/workflows/job/job-deploy.yaml
+    uses: ./.github/workflows/job-deploy.yaml
