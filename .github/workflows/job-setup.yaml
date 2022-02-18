@@ -1,0 +1,22 @@
+name: "Setup"
+
+on:
+  workflow_call:
+
+jobs:
+  setup:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Git repository
+        uses: actions/checkout@v2
+        with:
+          fetch-depth: 0
+
+      - name: Upload artifact base-repo
+        uses: actions/upload-artifact@v2
+        with:
+          name: base-repo
+          path: |
+            .
+            !node_modules
+          retention-days: 1
