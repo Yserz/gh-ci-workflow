@@ -12,5 +12,8 @@ jobs:
         with:
           name: base-repo
 
+      - name: Install dependencies
+        run: yarn --frozen-lockfile
+
       - name: Build
         run: yarn build

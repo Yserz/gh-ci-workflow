@@ -12,12 +12,11 @@ jobs:
         with:
           fetch-depth: 0
 
-      - name: Install dependencies
-        run: yarn --frozen-lockfile
-
       - name: Upload artifact base-repo
         uses: actions/upload-artifact@v2
         with:
           name: base-repo
-          path: .
+          path: |
+            .
+            !node_modules
           retention-days: 1
