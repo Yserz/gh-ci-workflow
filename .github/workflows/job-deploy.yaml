@@ -4,20 +4,13 @@ on:
   workflow_call:
 
 jobs:
-  deploy_staging:
-    if: secrets.ENV == 'staging'
+  deploy:
     runs-on: ubuntu-latest
+    environment:
+      name: staging
+      url: "https://google.com/"
     steps:
       - name: Deploy
         run: |
-          echo "Deploy staging"
-          ls -lah
-
-  deploy_production:
-    if: secrets.ENV == 'production'
-    runs-on: ubuntu-latest
-    steps:
-      - name: Deploy
-        run: |
-          echo "Deploy production"
+          echo Deploy ${{ secrets.ENV }}
           ls -lah
