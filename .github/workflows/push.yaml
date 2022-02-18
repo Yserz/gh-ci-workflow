@@ -14,16 +14,12 @@ jobs:
         with:
           access_token: ${{ github.token }}
 
-  setup:
-    needs: cancel-previous
-    uses: ./.github/workflows/job-setup.yaml
-
   build:
-    needs: setup
+    needs: cancel-previous
     uses: ./.github/workflows/job-build.yaml
 
   test:
-    needs: setup
+    needs: cancel-previous
     uses: ./.github/workflows/job-test.yaml
 
   deploy:
