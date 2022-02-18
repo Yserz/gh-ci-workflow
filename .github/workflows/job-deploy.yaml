@@ -9,6 +9,6 @@ jobs:
     steps:
       - name: Deploy
         run: |
-          echo "is staging ${{secrets.ENV == staging}}"
-          echo "is production ${{secrets.ENV == production}}"
+          echo 'is staging ${{secrets.ENV == 'staging'}}'
+          echo 'is production ${{secrets.ENV == 'production'}}'
           ls -lah
