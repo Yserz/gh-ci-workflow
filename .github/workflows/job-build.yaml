@@ -7,23 +7,10 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout Git repository
-        uses: actions/checkout@v2
+      - name: Download artifact base-repo
+        uses: actions/download-artifact@v2
         with:
-          fetch-depth: 0
-
-      - name: Set up environment variables
-        run: |
-          echo "GIT_TAG=$(git tag --points-at ${{github.sha}})" >> $GITHUB_ENV
-          echo "GIT_BRANCH=$(git branch --show-current)" >> $GITHUB_ENV
-
-      - name: Print public environment variables
-        run: |
-          echo -e "GIT_TAG = ${GIT_TAG}"
-          echo -e "GIT_BRANCH = ${GIT_BRANCH}"
-
-      - name: Install dependencies
-        run: yarn --frozen-lockfile
+          name: base-repo
 
       - name: Build
         run: yarn build
