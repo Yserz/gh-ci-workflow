@@ -1,0 +1,27 @@
+name: "Build"
+
+on:
+  workflow_call:
+    inputs:
+      OVERLAY:
+        required: true
+        type: string
+
+jobs:
+  build-docker:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Git repository
+        uses: actions/checkout@v2
+        with:
+          fetch-depth: 0
+
+      - run: echo "${{inputs.OVERLAY}}"
+
+      # - name: Archive build
+      #   uses: actions/upload-artifact@v2
+      #   with:
+      #     name: build
+      #     path: |
+      #       build
+      #     retention-days: 1

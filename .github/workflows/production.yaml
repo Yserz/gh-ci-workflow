@@ -14,9 +14,26 @@ jobs:
         with:
           access_token: ${{ github.token }}
 
-  build:
+  build-a:
     needs: cancel-previous
-    uses: ./.github/workflows/job-build.yaml
+    uses: ./.github/workflows/job-build-docker.yaml
+    with:
+      OVERLAY: a
+
+  build-b:
+    needs: cancel-previous
+    uses: ./.github/workflows/job-build-docker.yaml
+    with:
+      OVERLAY: b
+
+  build-c:
+    needs: cancel-previous
+    uses: ./.github/workflows/job-build-docker.yaml
+    with:
+      OVERLAY: c
+
+  build:
+    needs: [build-a, build-b, build-c]
 
   test:
     needs: cancel-previous
