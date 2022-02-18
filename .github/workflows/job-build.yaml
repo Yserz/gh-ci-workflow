@@ -4,10 +4,10 @@ on:
   workflow_call:
 
 jobs:
-  setup:
+  build:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout Git repository with history for all branches and tags
+      - name: Checkout Git repository
         uses: actions/checkout@v2
         with:
           fetch-depth: 0

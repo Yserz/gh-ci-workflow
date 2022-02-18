@@ -4,8 +4,24 @@ on:
   workflow_call:
 
 jobs:
-  setup:
+  test:
     runs-on: ubuntu-latest
     steps:
+      - name: Checkout Git repository
+        uses: actions/checkout@v2
+        with:
+          fetch-depth: 0
+
+      - name: Install dependencies
+        run: yarn --frozen-lockfile
+
       - name: Test
-        run: yarn test
+        run: yarn test --coverage
+
+      - name: Archive coverage report
+        uses: actions/upload-artifact@v2
+        with:
+          name: coverage-report
+          path: |
+            coverage
+          retention-days: 1
