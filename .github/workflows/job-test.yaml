@@ -25,3 +25,17 @@ jobs:
           path: |
             coverage
           retention-days: 1
+
+  test-types:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Download artifact base-repo
+        uses: actions/download-artifact@v2
+        with:
+          name: base-repo
+
+      - name: Install dependencies
+        run: yarn --frozen-lockfile
+
+      - name: Test
+        run: yarn test:types
