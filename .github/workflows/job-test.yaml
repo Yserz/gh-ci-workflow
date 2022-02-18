@@ -7,5 +7,15 @@ jobs:
   setup:
     runs-on: ubuntu-latest
     steps:
+      - name: Install dependencies
+        run: yarn --frozen-lockfile
+
       - name: Test
-        run: yarn test
+        run: yarn test --coverage
+
+      - name: Archive coverage report
+        uses: actions/upload-artifact@v2
+        with:
+          name: Coverage report
+          path: |
+            coverage
