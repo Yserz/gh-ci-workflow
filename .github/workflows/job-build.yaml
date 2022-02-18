@@ -5,6 +5,7 @@ on:
 
 jobs:
   setup:
+    runs-on: ubuntu-latest
     steps:
       - name: Checkout Git repository with history for all branches and tags
         uses: actions/checkout@v2
