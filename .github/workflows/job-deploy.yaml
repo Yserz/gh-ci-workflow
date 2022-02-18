@@ -10,6 +10,13 @@ jobs:
       name: staging
       url: "https://google.com/"
     steps:
+      - name: Create GitHub release
+        uses: softprops/action-gh-release@1e07f4398721186383de40550babbdf2b84acfc5
+        env:
+          GITHUB_TOKEN: ${{github.token}}
+        with:
+          generate_release_notes: true
+
       - name: Deploy
         run: |
           echo Deploy ${{ secrets.ENV }}
