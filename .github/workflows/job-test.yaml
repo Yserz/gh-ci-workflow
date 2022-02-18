@@ -16,6 +16,6 @@ jobs:
       - name: Archive coverage report
         uses: actions/upload-artifact@v2
         with:
-          name: Coverage report
+          name: coverage-report
           path: |
             coverage
