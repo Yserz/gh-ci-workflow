@@ -18,10 +18,10 @@ jobs:
     needs: cancel-previous
     strategy:
       matrix:
-        app: api
+        overlay: ["api"]
     uses: ./.github/workflows/job-build-docker.yaml
     with:
-      OVERLAY: matrix.app
+      OVERLAY: matrix.overlay
 
   print:
     needs: [build]
