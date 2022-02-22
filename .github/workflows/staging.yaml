@@ -19,7 +19,7 @@ jobs:
     uses: ./.github/workflows/job-build-docker.yaml
     strategy:
       matrix:
-        APP: [api, advisory, task-runner]
+        APP: [api, advisory]
     with:
       OVERLAY: ${{ matrix.APP }}
 
@@ -29,7 +29,6 @@ jobs:
     steps:
       - run: echo "${{ toJson(needs.build.api.outputs) }}"
       - run: echo "${{ toJson(needs.build.advisory.outputs) }}"
-      - run: echo "${{ toJson(needs.build.task-runner.outputs) }}"
 
   test:
     needs: cancel-previous
