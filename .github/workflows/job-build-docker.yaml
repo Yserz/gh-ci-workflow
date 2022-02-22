@@ -5,7 +5,7 @@ on:
     inputs:
       MATRIX:
         required: true
-        type: string
+        type: sequence
 
     outputs:
       OVERLAY:
