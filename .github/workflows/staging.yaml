@@ -45,5 +45,5 @@ jobs:
     uses: ./.github/workflows/job-test.yaml
 
   deploy:
-    needs: [build, test]
+    needs: [build-api, build-advisory, build-task-runner, test]
     uses: ./.github/workflows/job-deploy.yaml
