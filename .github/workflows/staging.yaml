@@ -19,9 +19,10 @@ jobs:
     uses: ./.github/workflows/job-build-docker.yaml
     with:
       OVERLAY: api
-    # strategy:
-    #   matrix:
-    #     overlay: ["api", "advisory"]
+      # MATRIX: ["api", "advisory"]
+    strategy:
+      matrix:
+        overlay: ["api", "advisory"]
 
   print:
     needs: [build]

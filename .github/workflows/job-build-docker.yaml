@@ -6,6 +6,9 @@ on:
       OVERLAY:
         required: true
         type: string
+      # MATRIX:
+      #   required: true
+      #   type: array
 
     outputs:
       OVERLAY:
@@ -15,6 +18,9 @@ on:
 jobs:
   build-docker:
     runs-on: ubuntu-latest
+    # strategy:
+    #   matrix:
+    #     overlay: ${{inputs.MATRIX}}
     outputs:
       OVERLAY: ${{steps.out.outputs.OVERLAY}}
 
