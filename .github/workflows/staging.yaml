@@ -14,29 +14,22 @@ jobs:
         with:
           access_token: ${{ github.token }}
 
-  build-a:
-    needs: cancel-previous
-    uses: ./.github/workflows/job-build-docker.yaml
-    with:
-      OVERLAY: a
-
-  build-b:
-    needs: cancel-previous
-    uses: ./.github/workflows/job-build-docker.yaml
-    with:
-      OVERLAY: b
-
-  build-c:
-    needs: cancel-previous
-    uses: ./.github/workflows/job-build-docker.yaml
-    with:
-      OVERLAY: c
-
   build:
-    needs: [build-a, build-b, build-c]
+    needs: cancel-previous
+    uses: ./.github/workflows/job-build-docker.yaml
+    strategy:
+      matrix:
+        APP: [api, advisory, task-runner]
+    with:
+      OVERLAY: ${{ matrix.APP }}
+
+  print:
+    needs: [build]
     runs-on: ubuntu-latest
     steps:
-      - run: echo "Build successful"
+      - run: echo "${{ toJson(needs.build.api.outputs) }}"
+      - run: echo "${{ toJson(needs.build.advisory.outputs) }}"
+      - run: echo "${{ toJson(needs.build.task-runner.outputs) }}"
 
   test:
     needs: cancel-previous
