@@ -27,8 +27,7 @@ jobs:
     needs: [build]
     runs-on: ubuntu-latest
     steps:
-      - run: echo "${{ toJson(needs.build.api.outputs) }}"
-      - run: echo "${{ toJson(needs.build.advisory.outputs) }}"
+      - run: echo "${{ toJson(needs.build.outputs) }}"
 
   test:
     needs: cancel-previous
