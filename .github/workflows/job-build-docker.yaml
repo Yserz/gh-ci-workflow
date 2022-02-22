@@ -8,7 +8,7 @@ on:
         type: string
 
     outputs:
-      CONTAINER_URL:
+      OVERLAY:
         description: "OVERLAY"
         value: ${{jobs.build-docker.outputs.OVERLAY}}
 
