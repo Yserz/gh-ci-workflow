@@ -36,10 +36,10 @@ jobs:
     needs: [build-api, build-advisory, build-task-runner]
     runs-on: ubuntu-latest
     steps:
-      - run: echo "${{ toJson(needs) }}"
-      - run: echo "${{ toJson(needs.build-api.outputs) }}"
-      - run: echo "${{ toJson(needs.build-advisory.outputs) }}"
-      - run: echo "${{ toJson(needs.build-task-runner.outputs) }}"
+      - run: echo "${{ needs }}"
+      - run: echo "${{ needs.build-api.outputs }}"
+      - run: echo "${{ needs.build-advisory.outputs }}"
+      - run: echo "${{ needs.build-task-runner.outputs }}"
 
   test:
     needs: cancel-previous
