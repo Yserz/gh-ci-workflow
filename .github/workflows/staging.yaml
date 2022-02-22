@@ -19,7 +19,7 @@ jobs:
     uses: ./.github/workflows/job-build-docker.yaml
     strategy:
       matrix:
-        APP: [api, advisory]
+        app: [api]
     with:
       OVERLAY: matrix.APP
 
