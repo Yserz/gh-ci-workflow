@@ -3,12 +3,9 @@ name: "Build"
 on:
   workflow_call:
     inputs:
-      OVERLAY:
+      MATRIX:
         required: true
         type: string
-      # MATRIX:
-      #   required: true
-      #   type: array
 
     outputs:
       OVERLAY:
@@ -18,9 +15,9 @@ on:
 jobs:
   build-docker:
     runs-on: ubuntu-latest
-    # strategy:
-    #   matrix:
-    #     overlay: ${{inputs.MATRIX}}
+    strategy:
+      matrix:
+        OVERLAY: ${{inputs.MATRIX}}
     outputs:
       OVERLAY: ${{steps.out.outputs.OVERLAY}}
 
@@ -31,8 +28,8 @@ jobs:
           fetch-depth: 0
 
       - name: Print
-        run: echo "${{inputs.OVERLAY}}"
+        run: echo "${{matrix.OVERLAY}}"
 
       - name: Output
         id: out
-        run: echo "::set-output name=OVERLAY::${{inputs.OVERLAY}}"
+        run: echo "::set-output name=OVERLAY::${{matrix.OVERLAY}}"
