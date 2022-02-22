@@ -32,15 +32,6 @@ jobs:
     with:
       APP: task-runner
 
-  print:
-    needs: [build-api, build-advisory, build-task-runner]
-    runs-on: ubuntu-latest
-    steps:
-      - run: echo "${{ needs }}"
-      - run: echo "${{ needs.build-api.outputs }}"
-      - run: echo "${{ needs.build-advisory.outputs }}"
-      - run: echo "${{ needs.build-task-runner.outputs }}"
-
   test:
     needs: cancel-previous
     uses: ./.github/workflows/job-test.yaml
@@ -48,3 +39,7 @@ jobs:
   deploy:
     needs: [build-api, build-advisory, build-task-runner, test]
     uses: ./.github/workflows/job-deploy.yaml
+    with:
+      API_CONTAINER_URL: ${{needs.build-api.outputs.APP}}
+      ADVISORY_CONTAINER_URL: ${{needs.build-advisory.outputs.APP}}
+      TASK_RUNNER_CONTAINER_URL: ${{needs.build-task-runner.outputs.APP}}

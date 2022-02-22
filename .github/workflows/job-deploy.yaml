@@ -2,6 +2,16 @@ name: "Deploy"
 
 on:
   workflow_call:
+    inputs:
+      API_CONTAINER_URL:
+        required: true
+        type: string
+      ADVISORY_CONTAINER_URL:
+        required: true
+        type: string
+      TASK_RUNNER_CONTAINER_URL:
+        required: true
+        type: string
 
 jobs:
   deploy:
@@ -12,5 +22,6 @@ jobs:
     steps:
       - name: Deploy
         run: |
-          echo Deploy ${{ secrets.ENV }}
-          ls -la
+          echo Deploy ${{ inputs.API_CONTAINER_URL }}
+          echo Deploy ${{ inputs.ADVISORY_CONTAINER_URL }}
+          echo Deploy ${{ inputs.TASK_RUNNER_CONTAINER_URL }}
