@@ -3,23 +3,20 @@ name: "Build"
 on:
   workflow_call:
     inputs:
-      MATRIX:
+      APP:
         required: true
-        type: sequence
+        type: string
 
     outputs:
-      OVERLAY:
-        description: "OVERLAY"
-        value: ${{jobs.build-docker.outputs.OVERLAY}}
+      APP:
+        description: "APP"
+        value: ${{jobs.build-docker.outputs.APP}}
 
 jobs:
   build-docker:
     runs-on: ubuntu-latest
-    strategy:
-      matrix:
-        OVERLAY: ${{inputs.MATRIX}}
     outputs:
-      OVERLAY: ${{steps.out.outputs.OVERLAY}}
+      APP: ${{steps.out.outputs.APP}}
 
     steps:
       - name: Checkout Git repository
@@ -28,8 +25,8 @@ jobs:
           fetch-depth: 0
 
       - name: Print
-        run: echo "${{matrix.OVERLAY}}"
+        run: echo "${{inputs.APP}}"
 
       - name: Output
         id: out
-        run: echo "::set-output name=OVERLAY::${{matrix.OVERLAY}}"
+        run: echo "::set-output name=APP::${{inputs.APP}}"

@@ -14,17 +14,31 @@ jobs:
         with:
           access_token: ${{ github.token }}
 
-  build:
+  build-api:
     needs: cancel-previous
     uses: ./.github/workflows/job-build-docker.yaml
     with:
-      MATRIX: [api, advisory, task-runner]
+      APP: api
+
+  build-advisory:
+    needs: cancel-previous
+    uses: ./.github/workflows/job-build-docker.yaml
+    with:
+      APP: advisory
+
+  build-task-runner:
+    needs: cancel-previous
+    uses: ./.github/workflows/job-build-docker.yaml
+    with:
+      APP: task-runner
 
   print:
-    needs: [build]
+    needs: [build-api, build-advisory, build-task-runner]
     runs-on: ubuntu-latest
     steps:
-      - run: echo "${{ toJson(needs.build.outputs) }}"
+      - run: echo "${{ toJson(needs.build-api.outputs) }}"
+      - run: echo "${{ toJson(needs.build-advisory.outputs) }}"
+      - run: echo "${{ toJson(needs.build-task-runner.outputs) }}"
 
   test:
     needs: cancel-previous
