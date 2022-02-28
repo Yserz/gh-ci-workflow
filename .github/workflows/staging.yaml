@@ -5,6 +5,9 @@ on:
     branches:
       - main
 
+env:
+  TEST: test
+
 jobs:
   cancel-previous:
     runs-on: ubuntu-latest
@@ -18,7 +21,7 @@ jobs:
     needs: cancel-previous
     uses: ./.github/workflows/job-build-docker.yaml
     with:
-      APP: api
+      APP: ${{env.TEST}}
 
   build-advisory:
     needs: cancel-previous
