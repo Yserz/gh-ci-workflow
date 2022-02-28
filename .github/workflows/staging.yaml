@@ -20,8 +20,10 @@ jobs:
   build-api:
     needs: cancel-previous
     uses: ./.github/workflows/job-build-docker.yaml
+    env:
+      TEST: ${{ env.TEST }}
     with:
-      APP: ${{github.env.TEST}}
+      APP: ${{ env.TEST }}
 
   build-advisory:
     needs: cancel-previous
